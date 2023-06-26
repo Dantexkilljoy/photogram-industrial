@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2023_06_23_193133) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.citext "username"
-    t.boolean "private"
+    t.boolean "private", default: true
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
     t.datetime "created_at", precision: 6, null: false
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2023_06_23_193133) do
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "follow_requests", "users", column: "recipient_id"
   add_foreign_key "follow_requests", "users", column: "sender_id"
+  add_foreign_key "likes", "photos"
   add_foreign_key "likes", "users", column: "fan_id"
   add_foreign_key "photos", "users", column: "owner_id"
 end

@@ -35,7 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       # t.string :username
       t.citext :username
-      t.boolean :private
+      t.boolean :private, default: true
       t.integer :likes_count, default: 0
       t.integer :comments_count, default: 0
 
