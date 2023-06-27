@@ -1,6 +1,6 @@
 class Photo < ApplicationRecord
-  # belongs_to :owner
-  belongs_to :owner, class_name: "User", counter_cache: true
+  # belongs_to :owner, counter_cache: true
+  belongs_to :owner, class_name: "User"
 
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
