@@ -10,47 +10,67 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Feed</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Discover</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Resources
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/photos">Photos</a></li>
-            <li><a class="dropdown-item" href="/likes">Likes</a></li>
-            <li><a class="dropdown-item" href="/follow_requests">Follow Requests</a></li>
-            <li><a class="dropdown-item" href="/comments">Comments</a></li>
-          </ul>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Feed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Discover</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/photos">Photos</a></li>
+              <li><a class="dropdown-item" href="/likes">Likes</a></li>
+              <li><a class="dropdown-item" href="/follow_requests">Follow Requests</a></li>
+              <li><a class="dropdown-item" href="/comments">Comments</a></li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
 
       <div class="d-flex">
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if user_signed_in? %>
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Add post</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Add post</a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Your Profile</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Your Profile</a>
+            </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Username
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Edit profile</a></li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-          </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= current_user.username %>
+              </a>
+              <ul class="dropdown-menu">
 
+              <li>
+                <%= link_to "Edit profile", edit_user_registration_path, class: "dropdown-item" %>
+              </li>
+
+              <li>
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </li>
+              </ul>
+            </li>
+
+          <% else %>
+
+            <li class="nav-item">
+              <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+            </li>
+
+          <% end %>
         </ul>
 
       </div>
