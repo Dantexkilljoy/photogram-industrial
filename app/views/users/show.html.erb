@@ -1,10 +1,48 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <h1>
-      <%= @user.username.capitalize %>
-    </h1>
 
-    <ul class="nav nav-tabs">
+    <div class="media-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="mt-0 mb-3 display-4">
+          <%= @user.username %>
+        </h1>
+
+        <div>
+          <span class="badge text-bg-secondary">
+            <% if @user.private == true %>
+              Private
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="col">
+            Followers 
+            <span class="badge text-bg-secondary">
+              <%= @user.accepted_received_follow_requests.count %>
+            </span>
+        </div>
+        
+        <div class="col">
+            Following
+            <span class="badge text-bg-secondary">
+              <%= @user.accepted_sent_follow_requests.count %>
+            </span>    
+        </div>
+
+        <div class="col">
+            Pending
+            <span class="badge text-bg-secondary">
+              <%= @user.received_follow_requests.count %>
+            </span>  
+        </div>
+      </div>
+    </div>
+
+    <ul class="nav nav-tabs nav-justified mb-1">
       <li class="nav-item">
         <%= link_to "Posts", users_path(@user.username), class: "nav-link" %>
       </li>
@@ -16,7 +54,7 @@
   </div>
 </div>
 
-<%= current_user.own_photos.count %>
+
 
 <% current_user.own_photos.each do |photo| %>
   <div class="row mb-4">
